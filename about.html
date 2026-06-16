@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | Resolve Home Services — Truro, NS</title>
+  <meta name="description" content="Learn about Resolve Home Services — Truro's premium exterior cleaning company. Meet our team, our mission, and what makes us different." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --teal:        #0d9488;
+      --teal-light:  #14b8a6;
+      --teal-dark:   #0f766e;
+      --blue-light:  #7dd3fc;
+      --blue-dark:   #0c4a6e;
+      --navy:        #0a2540;
+      --navy-deep:   #061829;
+      --gray-400:    #94a3b8;
+      --gold:        #f59e0b;
+      --font-body:   'Inter', sans-serif;
+      --font-serif:  'Playfair Display', serif;
+      --radius-md:   16px;
+      --radius-lg:   24px;
+      --radius-xl:   40px;
+      --shadow-teal: 0 8px 32px rgba(13,148,136,.35);
+      --transition:  0.35s cubic-bezier(.4,0,.2,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--navy-deep); color: #fff; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal-left.visible { opacity: 1; transform: none; }
+    .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal-right.visible { opacity: 1; transform: none; }
+
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--teal), var(--teal-light)); color: #fff; font-weight: 700; font-size: .95rem; padding: 15px 32px; border-radius: 50px; border: none; cursor: pointer; box-shadow: var(--shadow-teal); transition: var(--transition); white-space: nowrap; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 48px rgba(13,148,136,.5); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.08); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.18); color: #fff; font-weight: 600; font-size: .95rem; padding: 15px 32px; border-radius: 50px; cursor: pointer; transition: var(--transition); white-space: nowrap; }
+    .btn-ghost:hover { background: rgba(255,255,255,.16); transform: translateY(-2px); }
+
+    .section-label { display: inline-flex; align-items: center; gap: 8px; font-size: .75rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--teal-light); margin-bottom: 16px; }
+    .section-label::before { content: ''; width: 28px; height: 2px; background: var(--teal-light); border-radius: 2px; }
+
+    /* NAVBAR */
+    #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 16px 0; background: rgba(6,24,41,.95); backdrop-filter: blur(24px); border-bottom: 1px solid rgba(255,255,255,.08); transition: var(--transition); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { font-size: .875rem; font-weight: 500; color: rgba(255,255,255,.75); transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--teal-light); }
+    .nav-cta { display: flex; align-items: center; gap: 12px; }
+    .nav-phone { font-size: .875rem; font-weight: 600; color: var(--teal-light); }
+    .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { width: 24px; height: 2px; background: #fff; border-radius: 2px; }
+    .mobile-nav { display: none; position: fixed; inset: 0; z-index: 999; background: rgba(6,24,41,.97); backdrop-filter: blur(24px); flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .mobile-nav a:hover { color: var(--teal-light); }
+    .mobile-nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; color: #fff; font-size: 1.8rem; cursor: pointer; }
+
+    /* PAGE HERO */
+    .page-hero { position: relative; padding: 160px 0 100px; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 30% 50%, rgba(13,148,136,.12) 0%, transparent 65%), linear-gradient(135deg, #061829 0%, #0a2540 100%); }
+    .page-hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(13,148,136,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(13,148,136,.06) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 80% at 30% 50%, black 30%, transparent 100%); }
+    .page-hero-content { position: relative; z-index: 1; }
+    .page-title { font-family: var(--font-serif); font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 700; line-height: 1.08; margin-bottom: 20px; }
+    .page-title span { background: linear-gradient(135deg, var(--teal-light), var(--blue-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .page-lead { font-size: 1.15rem; color: rgba(255,255,255,.65); line-height: 1.8; max-width: 580px; }
+
+    /* MISSION */
+    #mission { padding: 90px 0; }
+    .mission-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .mission-text h2 { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; line-height: 1.2; margin-bottom: 20px; }
+    .mission-text p { font-size: 1.05rem; color: rgba(255,255,255,.75); line-height: 1.85; margin-bottom: 20px; }
+    .mission-visual { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius-xl); padding: 52px 40px; position: relative; overflow: hidden; }
+    .mission-visual::before { content: ''; position: absolute; top: -60px; right: -60px; width: 250px; height: 250px; background: radial-gradient(circle, rgba(13,148,136,.2), transparent 70%); }
+    .mission-stat { text-align: center; padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .mission-stat:last-child { border-bottom: none; padding-bottom: 0; }
+    .mission-stat-num { font-size: 2.8rem; font-weight: 900; background: linear-gradient(135deg, var(--teal-light), var(--blue-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+    .mission-stat-label { font-size: .9rem; color: var(--gray-400); margin-top: 4px; }
+
+    /* TEAM */
+    #team { padding: 90px 0; background: linear-gradient(180deg, rgba(10,37,64,.3) 0%, var(--navy-deep) 100%); }
+    .team-header { text-align: center; margin-bottom: 56px; }
+    .team-header h2 { font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; margin-bottom: 12px; }
+    .team-header p { font-size: 1rem; color: var(--gray-400); max-width: 500px; margin: 0 auto; }
+    .team-card { max-width: 480px; margin: 0 auto; background: linear-gradient(135deg, rgba(13,148,136,.1), rgba(12,74,110,.12)); border: 1px solid rgba(13,148,136,.25); border-radius: var(--radius-xl); padding: 52px 44px; text-align: center; }
+    .team-avatar { width: 100px; height: 100px; background: linear-gradient(135deg, var(--teal-dark), var(--teal)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 900; color: #fff; margin: 0 auto 24px; box-shadow: var(--shadow-teal); border: 3px solid rgba(13,148,136,.4); }
+    .team-name { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; margin-bottom: 4px; }
+    .team-title { font-size: .85rem; font-weight: 700; color: var(--teal-light); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 20px; }
+    .team-bio { font-size: .95rem; color: rgba(255,255,255,.7); line-height: 1.8; margin-bottom: 28px; }
+    .team-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .team-tag { background: rgba(13,148,136,.12); border: 1px solid rgba(13,148,136,.25); border-radius: 50px; padding: 5px 14px; font-size: .78rem; font-weight: 600; color: var(--teal-light); }
+
+    /* COMMITMENTS */
+    #commitments { padding: 90px 0; }
+    .commit-header { text-align: center; margin-bottom: 56px; }
+    .commit-header h2 { font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; margin-bottom: 12px; }
+    .commit-header p { font-size: 1rem; color: var(--gray-400); max-width: 500px; margin: 0 auto; }
+    .commit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .commit-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius-lg); padding: 36px 28px; transition: var(--transition); }
+    .commit-card:hover { border-color: rgba(13,148,136,.4); transform: translateY(-4px); }
+    .commit-icon { width: 56px; height: 56px; background: linear-gradient(135deg, var(--teal-dark), var(--teal)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px; box-shadow: var(--shadow-teal); }
+    .commit-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .commit-desc { font-size: .9rem; color: var(--gray-400); line-height: 1.7; }
+
+    /* AREAS */
+    #about-areas { padding: 90px 0; background: linear-gradient(180deg, rgba(10,37,64,.3) 0%, var(--navy-deep) 100%); }
+    .areas-header { text-align: center; margin-bottom: 48px; }
+    .areas-header h2 { font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; margin-bottom: 12px; }
+    .areas-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+    .area-pill { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 50px; padding: 12px 24px; font-size: .95rem; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 8px; transition: var(--transition); }
+    .area-pill:hover { background: rgba(13,148,136,.12); border-color: rgba(13,148,136,.4); color: var(--teal-light); }
+
+    /* CTA */
+    #about-cta { padding: 100px 0; text-align: center; position: relative; overflow: hidden; }
+    #about-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(13,148,136,.12) 0%, transparent 70%); }
+    .cta-inner { position: relative; z-index: 1; max-width: 620px; margin: 0 auto; }
+    .cta-inner h2 { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.15; margin-bottom: 16px; }
+    .cta-inner p { font-size: 1.05rem; color: rgba(255,255,255,.6); line-height: 1.7; margin-bottom: 36px; }
+    .cta-btns { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 16px; }
+
+    /* FOOTER */
+    footer { background: var(--navy-deep); border-top: 1px solid rgba(255,255,255,.06); padding: 40px 0 28px; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: .8rem; color: rgba(255,255,255,.3); }
+    .footer-badges { display: flex; gap: 12px; }
+    .footer-badge { background: rgba(13,148,136,.1); border: 1px solid rgba(13,148,136,.2); border-radius: 50px; padding: 4px 12px; font-size: .7rem; font-weight: 600; color: var(--teal-light); }
+
+    @media (max-width: 900px) {
+      .mission-inner { grid-template-columns: 1fr; gap: 48px; }
+      .commit-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .commit-grid { grid-template-columns: 1fr; }
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy-deep); }
+    ::-webkit-scrollbar-thumb { background: var(--teal-dark); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" style="display:inline-flex;align-items:center;">
+        <svg viewBox="0 0 220 52" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:40px;width:auto;">
+          <text x="0" y="34" font-family="Inter,sans-serif" font-weight="800" font-size="30" fill="white">Resolve</text>
+          <text x="2" y="50" font-family="Inter,sans-serif" font-weight="700" font-size="11" fill="rgba(255,255,255,0.7)" letter-spacing="3">HOME SERVICES</text>
+          <g transform="translate(154,0) scale(0.038)"><path d="M355 15 C340 5 320 0 300 8 L280 30 L260 15 C240 8 215 12 200 28 L185 55 L205 65 L195 95 L215 85 L210 120 L240 100 L250 140 L270 110 L280 150 L300 115 L320 150 L330 110 L350 140 L360 100 L380 120 L375 85 L395 95 L385 65 L405 55 L390 28 C375 12 370 22 355 15Z" fill="#dc2626"/></g>
+        </svg>
+      </a>
+      <div style="display:flex;align-items:center;gap:16px;">
+        <a href="index.html" style="font-size:.875rem;font-weight:600;color:rgba(255,255,255,.75);flex-shrink:0;white-space:nowrap;transition:color .2s;" onmouseover="this.style.color='#14b8a6'" onmouseout="this.style.color='rgba(255,255,255,.75)'">Home</a>
+        <a href="index.html#quote" class="btn-ghost" style="padding:10px 20px;font-size:.85rem;flex-shrink:0;white-space:nowrap;">Free Quote</a>
+        <a href="tel:+19025550000" class="btn-primary" style="padding:11px 22px;font-size:.85rem;flex-shrink:0;white-space:nowrap;">📞 Call Now</a>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" id="mobileNavClose">✕</button>
+  <a href="index.html#services">Services</a>
+  <a href="index.html#areas">Areas</a>
+  <a href="index.html#gallery">Gallery</a>
+  <a href="about.html">About Us</a>
+  <a href="our-story.html">Our Story</a>
+  <a href="index.html#faq">FAQ</a>
+  <a href="tel:+19025550000" class="btn-ghost" style="margin-top:16px;"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Now</a>
+  <a href="index.html#quote" class="btn-primary">Get Free Quote</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="container">
+    <div class="page-hero-content">
+      <span class="section-label reveal">Resolve Home Services</span>
+      <h1 class="page-title reveal" style="transition-delay:.1s;">About <span>Us</span></h1>
+      <p class="page-lead reveal" style="transition-delay:.2s;">A local exterior cleaning company built on hard work, honest pricing, and results that speak for themselves.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section id="mission">
+  <div class="container">
+    <div class="mission-inner">
+      <div class="mission-text reveal-left">
+        <span class="section-label">Who We Are</span>
+        <h2>Truro's Trusted Exterior Cleaning Professionals</h2>
+        <p>Resolve Home Services is a locally owned and operated exterior cleaning company serving homeowners and businesses across Colchester County. We were built on the belief that every property deserves to be maintained with care, professionalism, and attention to detail.</p>
+        <p>From window cleaning to full house washes, we bring the same level of commitment to every job — no matter the size. We communicate clearly, show up on time, and don't leave until the work is done right.</p>
+        <p>We're not just another cleaning company. We're your neighbours, and we treat your property like it's our own.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:16px; margin-top:32px;">
+          <a href="index.html#quote" class="btn-primary">Get a Free Quote</a>
+          <a href="tel:+19025550000" class="btn-ghost"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Us</a>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="mission-visual">
+          <div class="mission-stat">
+            <div class="mission-stat-num">4+</div>
+            <div class="mission-stat-label">Years serving Colchester County</div>
+          </div>
+          <div class="mission-stat">
+            <div class="mission-stat-num">100+</div>
+            <div class="mission-stat-label">Projects completed</div>
+          </div>
+          <div class="mission-stat">
+            <div class="mission-stat-num">5.0★</div>
+            <div class="mission-stat-label">Google rating across 47 reviews</div>
+          </div>
+          <div class="mission-stat">
+            <div class="mission-stat-num">100%</div>
+            <div class="mission-stat-label">Satisfaction guaranteed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="container">
+    <div class="team-header reveal">
+      <span class="section-label">The Team</span>
+      <h2>Meet the Founder</h2>
+      <p>A one-person operation built with the work ethic of someone who's been doing this since he was 12.</p>
+    </div>
+    <div class="team-card reveal" style="transition-delay:.1s;">
+      <div class="team-avatar">MM</div>
+      <div class="team-name">Marcus McCully</div>
+      <div class="team-title">Founder &amp; Owner</div>
+      <div class="team-bio">Marcus founded Resolve Home Services at the age of 12, turning a passion for hard work and a desire to deliver real results into a growing local business. He personally oversees every job to make sure the standard of work matches the Resolve name.</div>
+      <div class="team-tags">
+        <span class="team-tag">Window Cleaning</span>
+        <span class="team-tag">Soft Washing</span>
+        <span class="team-tag">Gutter Cleaning</span>
+        <span class="team-tag">House Washing</span>
+        <span class="team-tag">Deck &amp; Fence</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMITMENTS -->
+<section id="commitments">
+  <div class="container">
+    <div class="commit-header reveal">
+      <span class="section-label">Our Promise</span>
+      <h2>What You Can Always Expect</h2>
+      <p>Every job, every time. These aren't aspirations — they're guarantees.</p>
+    </div>
+    <div class="commit-grid">
+      <div class="commit-card reveal" style="transition-delay:.1s;">
+        <div class="commit-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <div class="commit-title">We Show Up</div>
+        <div class="commit-desc">When we schedule a job, we're there. On time, prepared, and ready to work. Your time is valuable and we treat it that way.</div>
+      </div>
+      <div class="commit-card reveal" style="transition-delay:.15s;">
+        <div class="commit-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+        <div class="commit-title">Honest Pricing</div>
+        <div class="commit-desc">The price you're quoted is the price you pay. No hidden fees, no last-minute add-ons, no surprises on the invoice.</div>
+      </div>
+      <div class="commit-card reveal" style="transition-delay:.2s;">
+        <div class="commit-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="commit-title">Quality Work</div>
+        <div class="commit-desc">We don't cut corners. Every job is completed to a high standard using professional-grade equipment and techniques.</div>
+      </div>
+      <div class="commit-card reveal" style="transition-delay:.25s;">
+        <div class="commit-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="commit-title">Locally Owned</div>
+        <div class="commit-desc">Born and based in Brookfield. We're your neighbours, genuinely invested in this community and our reputation in it.</div>
+      </div>
+      <div class="commit-card reveal" style="transition-delay:.3s;">
+        <div class="commit-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="commit-title">Eco-Friendly</div>
+        <div class="commit-desc">We use biodegradable, environmentally responsible cleaning solutions that are safe for your family, pets, and landscaping.</div>
+      </div>
+      <div class="commit-card reveal" style="transition-delay:.35s;">
+        <div class="commit-icon"></div>
+        <div class="commit-title">Satisfaction Guaranteed</div>
+        <div class="commit-desc">If you're not happy with the results, we'll come back and make it right. No arguments, no excuses — just solutions.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AREAS -->
+<section id="about-areas">
+  <div class="container">
+    <div class="areas-header reveal">
+      <span class="section-label">Where We Work</span>
+      <h2>Areas We Serve</h2>
+    </div>
+    <div class="areas-pills reveal" style="transition-delay:.1s;">
+      <div class="area-pill">📍 Greater Truro</div>
+      <div class="area-pill">📍 Millbrook</div>
+      <div class="area-pill">📍 Hilden</div>
+      <div class="area-pill">📍 Brookfield</div>
+      <div class="area-pill">📍 Shortts Lake</div>
+      <div class="area-pill">📍 Stewiacke</div>
+    </div>
+    <p class="reveal" style="text-align:center; margin-top:28px; font-size:.9rem; color:var(--gray-400); transition-delay:.2s;">
+      Don't see your area? <a href="index.html#quote" style="color:var(--teal-light);font-weight:600;">Contact us</a> — we may still be able to help.
+    </p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="about-cta">
+  <div class="cta-inner reveal">
+    <span class="section-label" style="justify-content:center;">Ready to Get Started?</span>
+    <h2>Let's Make Your Property Look Its Best</h2>
+    <p>Get a free, no-obligation quote today. We'll respond quickly and work with you to find a time that fits.</p>
+    <div class="cta-btns">
+      <a href="index.html#quote" class="btn-primary" style="font-size:1.05rem;padding:18px 40px;">✦ Get My Free Quote</a>
+      <a href="tel:+19025550000" class="btn-ghost" style="font-size:1.05rem;padding:18px 40px;"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (902) 555-0000</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© 2024 Resolve Home Services. All rights reserved. Truro &amp; Colchester County, Nova Scotia.</p>
+      <div class="footer-badges">
+        <span class="footer-badge">Locally Owned</span>
+        <span class="footer-badge">5★ Google</span>
+        <span class="footer-badge">Eco-Friendly</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  const mobileNavClose = document.getElementById('mobileNavClose');
+  hamburgerBtn.addEventListener('click', () => { mobileNav.classList.add('open'); document.body.style.overflow = 'hidden'; });
+  mobileNavClose.addEventListener('click', () => { mobileNav.classList.remove('open'); document.body.style.overflow = ''; });
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mobileNav.classList.remove('open'); document.body.style.overflow = ''; }));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { mobileNav.classList.remove('open'); document.body.style.overflow = ''; } });
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>
