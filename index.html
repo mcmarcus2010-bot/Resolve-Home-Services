@@ -406,11 +406,7 @@
     /* ===================== FLOATING ===================== */
     #sticky-quote { position: fixed; bottom: 0; left: 0; right: 0; z-index: 900; background: rgba(6,24,41,.95); backdrop-filter: blur(20px); border-top: 1px solid rgba(13,148,136,.3); padding: 14px 24px; display: none; align-items: center; justify-content: space-between; gap: 16px; }
     #sticky-quote.visible { display: flex; }
-    .sticky-quote-text { font-size: .9rem; color: rgba(255,255,255,.7); }
-    #float-phone { position: fixed; bottom: 80px; right: 24px; z-index: 901; width: 58px; height: 58px; background: linear-gradient(135deg, var(--teal), var(--teal-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: var(--shadow-teal); cursor: pointer; animation: phoneBounce 3s ease-in-out infinite; text-decoration: none; }
-    @keyframes phoneBounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-    #float-phone::after { content: ''; position: absolute; inset: -3px; border-radius: 50%; border: 2px solid rgba(13,148,136,.4); animation: phoneRing 2s ease-in-out infinite; }
-    @keyframes phoneRing { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(1.5); opacity: 0; } }
+    .sticky-quote-text { font-size: .9rem; color: rgba(255,255,255,.7); } 50% { transform: translateY(-6px); } } 100% { transform: scale(1.5); opacity: 0; } }
 
     /* ===================== RESPONSIVE ===================== */
     @media (max-width: 1024px) {
@@ -502,7 +498,6 @@
       /* Floating chat button: icon only so it doesn't span the screen */
       .luma-btn-label { display: none; }
       #luma-btn { padding: 0; width: 56px; height: 56px; justify-content: center; border-radius: 50%; bottom: 84px; left: 16px; }
-      #float-phone { bottom: 84px; right: 16px; }
 
       /* Give the page breathing room above the sticky quote bar */
       body { scroll-padding-bottom: 90px; }
@@ -1175,7 +1170,6 @@
 </div>
 
 <!-- FLOATING -->
-<a href="tel:+19028140211" id="float-phone" aria-label="Call us"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
 <div id="sticky-quote">
   <span class="sticky-quote-text"><strong>Limited availability this month.</strong> Lock in your spot today.</span>
   <div style="display:flex;gap:12px;flex-shrink:0;">
