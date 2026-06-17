@@ -297,10 +297,11 @@
     .carousel-arrow {
       display: none; position: absolute; top: 38%; transform: translateY(-50%);
       width: 40px; height: 40px; border-radius: 50%;
-      background: rgba(13,148,136,.92); border: 2px solid rgba(255,255,255,.85); color: #fff;
+      background: rgba(255,255,255,.14); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+      border: 1.5px solid rgba(255,255,255,.7); color: #fff;
       font-size: 1.35rem; line-height: 1; cursor: pointer; z-index: 6;
       align-items: center; justify-content: center; padding-bottom: 3px;
-      box-shadow: 0 4px 16px rgba(0,0,0,.4); transition: transform .15s ease, background .2s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,.25); transition: transform .15s ease, background .2s ease;
     }
     .carousel-arrow:active { transform: translateY(-50%) scale(.9); }
     .carousel-arrow.prev { left: 4px; }
@@ -1570,8 +1571,17 @@
       const card = grid.firstElementChild;
       return card ? card.getBoundingClientRect().width + 14 : grid.clientWidth * 0.85;
     };
-    prev.addEventListener('click', () => grid.scrollBy({ left: -step(), behavior: 'smooth' }));
-    next.addEventListener('click', () => grid.scrollBy({ left: step(), behavior: 'smooth' }));
+    const atEnd = () => grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 5;
+    const atStart = () => grid.scrollLeft <= 5;
+    // loop back around at the ends (infinite-style)
+    next.addEventListener('click', () => {
+      if (atEnd()) grid.scrollTo({ left: 0, behavior: 'smooth' });
+      else grid.scrollBy({ left: step(), behavior: 'smooth' });
+    });
+    prev.addEventListener('click', () => {
+      if (atStart()) grid.scrollTo({ left: grid.scrollWidth, behavior: 'smooth' });
+      else grid.scrollBy({ left: -step(), behavior: 'smooth' });
+    });
   });
 </script>
 </body>
