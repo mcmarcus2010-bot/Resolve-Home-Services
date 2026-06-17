@@ -425,7 +425,6 @@
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const mobileNav = document.getElementById('mobileNav');
   const mobileNavClose = document.getElementById('mobileNavClose');
-  const mobileNavClose = document.getElementById('mobileNavClose');
   hamburgerBtn.addEventListener('click', () => { mobileNav.classList.add('open'); document.body.style.overflow = 'hidden'; });
   mobileNavClose.addEventListener('click', () => { mobileNav.classList.remove('open'); document.body.style.overflow = ''; });
   mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mobileNav.classList.remove('open'); document.body.style.overflow = ''; }));
