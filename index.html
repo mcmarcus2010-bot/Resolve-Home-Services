@@ -423,12 +423,63 @@
       .process-steps { grid-template-columns: 1fr; }
       #sticky-quote { flex-direction: column; gap: 8px; text-align: center; }
     }
-    @media (max-width: 480px) {
-      .container { padding: 0 16px; }
-      #social-proof,#services,#why-us,#gallery,#process,#testimonials,#faq,#quote,#final-cta { padding: 64px 0; }
-      .services-grid,.testimonials-grid,.gallery-grid { grid-template-columns: 1fr; }
+    /* ---- Tablets & large phones ---- */
+    @media (max-width: 600px) {
+      .container { padding: 0 18px; }
+      #social-proof,#services,#why-us,#gallery,#process,#testimonials,#faq,#quote,#final-cta { padding: 60px 0; }
+
+      /* Section headings a touch smaller */
+      .section-title { font-size: clamp(1.7rem, 7vw, 2.3rem); }
+
+      /* Hero */
+      #hero { padding-top: 100px; min-height: auto; padding-bottom: 60px; }
+      .hero-stats { gap: 18px 28px; }
+      .hero-stat-num { font-size: 1.5rem; }
       .hero-btns { flex-direction: column; }
       .hero-btns .btn-primary, .hero-btns .btn-ghost { width: 100%; justify-content: center; }
+
+      /* Cards: trim heavy padding so content isn't squished */
+      .service-card { padding: 30px 24px; }
+      .testimonial-card { padding: 28px 24px; }
+      .why-item { padding: 22px 20px; }
+      .why-visual-card { padding: 40px 26px; }
+      .why-big-num { font-size: 4.5rem; }
+      .proof-card { padding: 28px 20px; }
+      .proof-card-num { font-size: 2.4rem; }
+
+      /* Quote form: big padding was eating the screen */
+      .quote-form { padding: 30px 22px; border-radius: 24px; }
+      .quote-feature { padding: 16px; }
+      .form-title { font-size: 1.5rem; }
+
+      /* Google rating block scales down */
+      .google-rating { padding: 16px 18px; gap: 14px; }
+      .google-logo { font-size: 1.5rem; }
+      .g-num { font-size: 1.7rem; }
+
+      /* Single-column grids */
+      .services-grid,.testimonials-grid,.gallery-grid { grid-template-columns: 1fr; }
+
+      /* Header: drop Free Quote (it's in the menu, sticky bar & hero) so the bar isn't crammed */
+      .nav-quote-btn { display: none; }
+
+      /* Floating chat button: icon only so it doesn't span the screen */
+      .luma-btn-label { display: none; }
+      #luma-btn { padding: 0; width: 56px; height: 56px; justify-content: center; border-radius: 50%; bottom: 84px; left: 16px; }
+      #float-phone { bottom: 84px; right: 16px; }
+
+      /* Give the page breathing room above the sticky quote bar */
+      body { scroll-padding-bottom: 90px; }
+    }
+
+    /* ---- Small phones ---- */
+    @media (max-width: 380px) {
+      .hero-title { font-size: 2.5rem; }
+      .hero-stats { gap: 14px 20px; }
+      .btn-primary, .btn-ghost { font-size: .9rem; padding: 13px 22px; }
+      /* Call button becomes icon-only to guarantee the header fits */
+      .nav-call-text { display: none; }
+      .nav-call-btn { padding: 11px 14px; }
     }
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--navy-deep); }
@@ -456,8 +507,8 @@
           <a href="#testimonials" style="font-size:.875rem;font-weight:600;color:rgba(255,255,255,.75);transition:color .2s;" onmouseover="this.style.color='#14b8a6'" onmouseout="this.style.color='rgba(255,255,255,.75)'">Reviews</a>
           <a href="our-story.html" style="font-size:.875rem;font-weight:600;color:rgba(255,255,255,.75);transition:color .2s;" onmouseover="this.style.color='#14b8a6'" onmouseout="this.style.color='rgba(255,255,255,.75)'">Our Story</a>
         </div>
-        <a href="#quote" class="btn-ghost" style="padding:10px 20px;font-size:.85rem;flex-shrink:0;white-space:nowrap;">Free Quote</a>
-        <a href="tel:+19028140211" class="btn-primary" style="padding:11px 22px;font-size:.85rem;flex-shrink:0;white-space:nowrap;"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Now</a>
+        <a href="#quote" class="btn-ghost nav-quote-btn" style="padding:10px 20px;font-size:.85rem;flex-shrink:0;white-space:nowrap;">Free Quote</a>
+        <a href="tel:+19028140211" class="btn-primary nav-call-btn" style="padding:11px 22px;font-size:.85rem;flex-shrink:0;white-space:nowrap;"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <span class="nav-call-text">Call Now</span></a>
         <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
           <span></span><span></span><span></span>
         </button>
