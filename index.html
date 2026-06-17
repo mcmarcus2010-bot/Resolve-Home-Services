@@ -42,8 +42,8 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--font-body); background: var(--navy-deep); color: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { font-family: var(--font-body); background: var(--navy-deep); color: var(--white); overflow-x: hidden; max-width: 100vw; -webkit-font-smoothing: antialiased; }
     img { max-width: 100%; display: block; }
     a { text-decoration: none; color: inherit; }
     ul { list-style: none; }
@@ -105,10 +105,15 @@
     .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 
     .hamburger {
-      display: flex; flex-direction: column; gap: 6px;
-      cursor: pointer; padding: 6px; background: none; border: none;
+      display: flex; align-items: center; gap: 9px;
+      cursor: pointer; padding: 8px 14px; background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.14); border-radius: 50px;
+      transition: var(--transition);
     }
-    .hamburger span { width: 26px; height: 2px; background: #fff; border-radius: 2px; transition: var(--transition); display: block; }
+    .hamburger:hover { background: rgba(255,255,255,.14); }
+    .hamburger-label { font-size: .8rem; font-weight: 700; color: #fff; letter-spacing: .02em; }
+    .hamburger-lines { display: flex; flex-direction: column; gap: 5px; }
+    .hamburger-lines span { width: 22px; height: 2px; background: #fff; border-radius: 2px; transition: var(--transition); display: block; }
 
     /* Sidebar drawer */
     .sidebar-overlay {
@@ -285,11 +290,14 @@
     .row-line { flex: 1; height: 1px; background: rgba(255,255,255,.08); }
 
     .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .areas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
 
     .ba-card { position: relative; border-radius: var(--radius-lg); overflow: hidden; }
+    /* Before + After shown together, side by side */
+    .ba-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .ba-photo {
-      position: relative; height: 280px; overflow: hidden;
-      border-radius: var(--radius-lg);
+      position: relative; height: 260px; overflow: hidden;
+      border-radius: 12px;
     }
     .ba-photo img {
       width: 100%; height: 100%; object-fit: cover;
@@ -297,13 +305,13 @@
     }
     .ba-card:hover .ba-photo img { transform: scale(1.04); }
     .ba-photo-label {
-      position: absolute; bottom: 12px; left: 12px;
-      padding: 4px 14px; border-radius: 50px;
-      font-size: .75rem; font-weight: 700; color: #fff;
+      position: absolute; bottom: 10px; left: 10px;
+      padding: 3px 12px; border-radius: 50px;
+      font-size: .72rem; font-weight: 800; color: #fff; letter-spacing: .04em;
       backdrop-filter: blur(8px);
     }
-    .ba-photo-label.before { background: rgba(0,0,0,.55); }
-    .ba-photo-label.after  { background: rgba(13,148,136,.75); }
+    .ba-photo-label.before { background: rgba(0,0,0,.6); }
+    .ba-photo-label.after  { background: rgba(13,148,136,.85); }
     .ba-info { padding: 14px 4px 4px; }
     .ba-title { font-size: .875rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
     .ba-result { font-size: .78rem; color: var(--teal-light); }
@@ -416,13 +424,40 @@
     @media (max-width: 768px) {
       .nav-quick-links { display: none; }
       .hamburger { display: flex; }
-      .why-grid { grid-template-columns: 1fr; }
       .faq-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
       .process-steps { grid-template-columns: 1fr; }
       #sticky-quote { flex-direction: column; gap: 8px; text-align: center; }
+
+      /* ===== MOBILE CAROUSELS — swipe instead of endless scrolling ===== */
+      .services-grid, .testimonials-grid, .gallery-grid, .why-grid, .areas-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 14px;
+        padding: 4px 0 16px;
+        scroll-padding-left: 0;
+        -webkit-overflow-scrolling: touch;
+      }
+      .services-grid > *, .testimonials-grid > *, .gallery-grid > *, .why-grid > *, .areas-grid > * {
+        flex: 0 0 86%;
+        scroll-snap-align: center;
+      }
+      .areas-grid > * { flex-basis: 62%; }
+      .why-grid > * { flex-basis: 78%; }
+      /* slim scroll indicator under each carousel */
+      .services-grid::-webkit-scrollbar, .testimonials-grid::-webkit-scrollbar,
+      .gallery-grid::-webkit-scrollbar, .why-grid::-webkit-scrollbar,
+      .areas-grid::-webkit-scrollbar { height: 4px; }
+      .services-grid::-webkit-scrollbar-thumb, .testimonials-grid::-webkit-scrollbar-thumb,
+      .gallery-grid::-webkit-scrollbar-thumb, .why-grid::-webkit-scrollbar-thumb,
+      .areas-grid::-webkit-scrollbar-thumb { background: rgba(13,148,136,.5); border-radius: 2px; }
+
+      /* "swipe" hint under section headers */
+      .swipe-hint { display: block !important; }
     }
+    .swipe-hint { display: none; font-size: .75rem; color: var(--teal-light); font-weight: 600; letter-spacing: .04em; margin-top: 10px; }
     /* ---- Tablets & large phones ---- */
     @media (max-width: 600px) {
       .container { padding: 0 18px; }
@@ -457,11 +492,12 @@
       .google-logo { font-size: 1.5rem; }
       .g-num { font-size: 1.7rem; }
 
-      /* Single-column grids */
-      .services-grid,.testimonials-grid,.gallery-grid { grid-template-columns: 1fr; }
-
-      /* Header: drop Free Quote (it's in the menu, sticky bar & hero) so the bar isn't crammed */
+      /* Header on phones: just logo + Call + Menu (Home is in the menu and the logo taps home) */
       .nav-quote-btn { display: none; }
+      .nav-home-link { display: none; }
+      .nav-inner > div:last-child { gap: 10px !important; }
+      .logo-svg { height: 30px; }
+      .hamburger { padding: 7px 12px; gap: 7px; }
 
       /* Floating chat button: icon only so it doesn't span the screen */
       .luma-btn-label { display: none; }
@@ -501,7 +537,7 @@
         </svg>
       </a>
       <div style="display:flex;align-items:center;gap:16px;">
-        <a href="#hero" style="font-size:.875rem;font-weight:600;color:rgba(255,255,255,.75);transition:color .2s;flex-shrink:0;white-space:nowrap;" onmouseover="this.style.color='#14b8a6'" onmouseout="this.style.color='rgba(255,255,255,.75)'">Home</a>
+        <a href="#hero" class="nav-home-link" style="font-size:.875rem;font-weight:600;color:rgba(255,255,255,.75);transition:color .2s;flex-shrink:0;white-space:nowrap;" onmouseover="this.style.color='#14b8a6'" onmouseout="this.style.color='rgba(255,255,255,.75)'">Home</a>
         <div class="nav-quick-links">
           <a href="#areas" style="font-size:.875rem;font-weight:600;color:rgba(255,255,255,.75);transition:color .2s;" onmouseover="this.style.color='#14b8a6'" onmouseout="this.style.color='rgba(255,255,255,.75)'">Areas</a>
           <a href="#testimonials" style="font-size:.875rem;font-weight:600;color:rgba(255,255,255,.75);transition:color .2s;" onmouseover="this.style.color='#14b8a6'" onmouseout="this.style.color='rgba(255,255,255,.75)'">Reviews</a>
@@ -510,7 +546,8 @@
         <a href="#quote" class="btn-ghost nav-quote-btn" style="padding:10px 20px;font-size:.85rem;flex-shrink:0;white-space:nowrap;">Free Quote</a>
         <a href="tel:+19028140211" class="btn-primary nav-call-btn" style="padding:11px 22px;font-size:.85rem;flex-shrink:0;white-space:nowrap;"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <span class="nav-call-text">Call Now</span></a>
         <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
-          <span></span><span></span><span></span>
+          <span class="hamburger-label">Menu</span>
+          <span class="hamburger-lines"><span></span><span></span><span></span></span>
         </button>
       </div>
     </div>
@@ -630,6 +667,7 @@
       <span class="section-label">What We Offer</span>
       <h2 class="section-title">Premium Exterior Cleaning<br />Services in Truro, NS</h2>
       <p class="section-sub" style="margin:16px auto 0;">Every service is performed by trained technicians using professional-grade equipment and eco-friendly solutions — because your property deserves nothing less.</p>
+      <div class="swipe-hint">← swipe to browse services →</div>
     </div>
     <div class="services-grid">
       <div class="service-card reveal" style="transition-delay:.1s;">
@@ -717,63 +755,31 @@
     <div class="reveal" style="text-align:center;">
       <span class="section-label">Real Results</span>
       <h2 class="section-title">Before &amp; After Gallery</h2>
-      <p class="section-sub" style="margin:16px auto 0;">See the transformations for yourself. Hover over each card to reveal the after.</p>
-    </div>
-    <!-- BEFORE ROW -->
-    <div class="gallery-row-label reveal">
-      <span class="row-badge before">Before</span>
-      <div class="row-line"></div>
-    </div>
-    <div class="gallery-grid">
-      <div class="ba-card reveal" style="transition-delay:.1s;">
-        <div class="ba-photo">
-          <img src="window-before.jpeg" alt="Dirty windows before cleaning" />
-          <div class="ba-photo-label before">Window Cleaning</div>
-        </div>
-        <div class="ba-info"><div class="ba-title">Before — Window Cleaning</div><div class="ba-result">Mineral deposits &amp; water streaks</div></div>
-      </div>
-      <div class="ba-card reveal" style="transition-delay:.2s;">
-        <div class="ba-photo">
-          <img src="siding-before.jpeg" alt="Stained siding before cleaning" />
-          <div class="ba-photo-label before">House Washing</div>
-        </div>
-        <div class="ba-info"><div class="ba-title">Before — House Washing</div><div class="ba-result">Rust stains &amp; years of grime buildup</div></div>
-      </div>
-      <div class="ba-card reveal" style="transition-delay:.3s;">
-        <div class="ba-photo">
-          <img src="gutter-before.jpeg" alt="Dirty gutters before cleaning" />
-          <div class="ba-photo-label before">Gutter Cleaning</div>
-        </div>
-        <div class="ba-info"><div class="ba-title">Before — Gutter Cleaning</div><div class="ba-result">Black streaks &amp; heavy oxidation</div></div>
-      </div>
+      <p class="section-sub" style="margin:16px auto 0;">See the difference for yourself — real homes, real results.</p>
+      <div class="swipe-hint">← swipe to see more →</div>
     </div>
 
-    <!-- AFTER ROW -->
-    <div class="gallery-row-label reveal" style="margin-top:32px;">
-      <span class="row-badge after">After</span>
-      <div class="row-line"></div>
-    </div>
     <div class="gallery-grid">
       <div class="ba-card reveal" style="transition-delay:.1s;">
-        <div class="ba-photo">
-          <img src="window-after.jpeg" alt="Clean windows after cleaning" />
-          <div class="ba-photo-label after">Window Cleaning</div>
+        <div class="ba-pair">
+          <div class="ba-photo"><img src="window-before.jpeg" alt="Dirty windows before cleaning" /><div class="ba-photo-label before">Before</div></div>
+          <div class="ba-photo"><img src="window-after.jpeg" alt="Clean windows after cleaning" /><div class="ba-photo-label after">After</div></div>
         </div>
-        <div class="ba-info"><div class="ba-title">After — Window Cleaning</div><div class="ba-result">✓ Crystal clear, streak-free finish</div></div>
+        <div class="ba-info"><div class="ba-title">Window Cleaning — Bible Hill, NS</div><div class="ba-result">✓ Crystal clear, streak-free finish</div></div>
       </div>
       <div class="ba-card reveal" style="transition-delay:.2s;">
-        <div class="ba-photo">
-          <img src="siding-after.jpeg" alt="Clean siding after washing" />
-          <div class="ba-photo-label after">House Washing</div>
+        <div class="ba-pair">
+          <div class="ba-photo"><img src="siding-before.jpeg" alt="Stained siding before washing" /><div class="ba-photo-label before">Before</div></div>
+          <div class="ba-photo"><img src="siding-after.jpeg" alt="Clean siding after washing" /><div class="ba-photo-label after">After</div></div>
         </div>
-        <div class="ba-info"><div class="ba-title">After — House Washing</div><div class="ba-result">✓ Like-new siding, stains eliminated</div></div>
+        <div class="ba-info"><div class="ba-title">House Washing — Truro, NS</div><div class="ba-result">✓ Rust stains &amp; grime eliminated</div></div>
       </div>
       <div class="ba-card reveal" style="transition-delay:.3s;">
-        <div class="ba-photo">
-          <img src="gutter-after.jpeg" alt="Clean gutters after cleaning" />
-          <div class="ba-photo-label after">Gutter Cleaning</div>
+        <div class="ba-pair">
+          <div class="ba-photo"><img src="gutter-before.jpeg" alt="Dirty gutters before cleaning" /><div class="ba-photo-label before">Before</div></div>
+          <div class="ba-photo"><img src="gutter-after.jpeg" alt="Clean gutters after cleaning" /><div class="ba-photo-label after">After</div></div>
         </div>
-        <div class="ba-info"><div class="ba-title">After — Gutter Cleaning</div><div class="ba-result">✓ Bright white, fully restored</div></div>
+        <div class="ba-info"><div class="ba-title">Gutter Cleaning — Truro, NS</div><div class="ba-result">✓ Bright white, fully restored</div></div>
       </div>
     </div>
 
@@ -796,8 +802,9 @@
       <span class="section-label">Coverage</span>
       <h2 class="section-title">Areas We Serve</h2>
       <p class="section-sub" style="margin: 16px auto 0;">Proudly serving homeowners and businesses across Colchester County, Nova Scotia.</p>
+      <div class="swipe-hint">← swipe through areas →</div>
     </div>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; max-width: 900px; margin: 0 auto;">
+    <div class="areas-grid" style="max-width: 900px; margin: 0 auto;">
       <div class="reveal" style="transition-delay:.05s; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius-md); padding: 28px 24px; text-align: center; transition: var(--transition);" onmouseover="this.style.borderColor='rgba(13,148,136,.4)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)';this.style.transform='none'">
         <div style="font-size: 1.8rem; margin-bottom: 10px;">📍</div>
         <div style="font-size: 1.05rem; font-weight: 700; color: #fff;">Greater Truro</div>
@@ -858,6 +865,7 @@
     <div class="reveal" style="text-align:center;">
       <span class="section-label">What Clients Say</span>
       <h2 class="section-title">Real Reviews from<br />Real Truro Homeowners</h2>
+      <div class="swipe-hint">← swipe through reviews →</div>
     </div>
     <div class="testimonials-grid">
       <div class="testimonial-card reveal" style="transition-delay:.1s;"><div class="test-stars stars">★★★★★</div><p class="test-text">"Resolve came to clean our windows and I honestly could not believe the difference. They were meticulous, professional, and finished in half the time I expected. My neighbours kept asking what we'd done to the house!"</p><div class="test-author"><div class="test-avatar" style="background:linear-gradient(135deg,#0d9488,#0c4a6e);">SM</div><div><div class="test-name">Sarah M.</div><div class="test-location">Truro, NS</div><div class="test-service">Window Cleaning</div></div></div></div>
